@@ -1,0 +1,48 @@
+ """Listens for new documents to be added to /messages. If the document has
+    an "surveyresp" field, creates an "uppercase" field containg the contents of
+    "surveyresp" in upper case."""
+
+    # Get the value of "surveyresp" if it exists.
+    if event.data is None:
+        return "No data"
+    try:
+        surveyresp = event.data.get("surveyresponse")
+    except KeyError:
+        # No "surveyresp" field, so do nothing.
+        return "No data"
+
+    firestore_client: google.cloud.firestore.Client = firestore.client()
+
+    # Define the safety words
+    safetywords = ["suicide", "guns", "gun", "shoot"]
+
+    # Check if any safety word is in the surveyresp string
+    if any(word in surveyresp for word in safetywords):
+        for word in safetywords:
+            if word in surveyresp:
+                # Create a new document in the "mail" collection
+                event.data.reference.update({"triggeredsafety for ": str(word)})
+                mail_data = {
+                    "to": "ok9985@gmail.com",
+                    "message": {
+                        "subject": "Respone Catchword Safety Alert",
+                        "html": "Found the following words in your response: " + surveyresp,
+                    }   
+                }
+                firestore_client.collection("mail").add(mail_data)
+                
+
+                sms_data = {
+                    "to": "+18777804236",
+                    "body": "safety check was triggered - please see email for details"
+                }
+                firestore_client.collection("sms").add(sms_data)
+
+                event.data.reference.update({"end": "WARNING: SAFETY CHECK TRIGGERED - EMAIL & SMS SENT"})
+
+                return
+    else:
+        # Set the "uppercase" field.
+        print(f"No threat detected {event.params['pushId']}: {surveyresp}")
+        event.data.reference.update({"end": "No safety checks triggered."})
+

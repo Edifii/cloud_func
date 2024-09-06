@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "edifii-dev",
+    "test": "edifii-dev"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
