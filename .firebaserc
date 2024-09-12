@@ -2,7 +2,7 @@
   "projects": {
     "default": "edifii-dev",
     "test": "edifii-dev", 
-    "prod": "edifii-prod"
+    "prod": "edifii-prod-40ae7"
   },
   "targets": {},
   "etags": {},
