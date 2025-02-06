@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Check Alert</title>
+</head>
+<body>
+    <h2 style="color: #d9534f;">Safety Check Alert Triggered</h2>
+    <h3>User Information:</h3>
+    <p><strong>User Email:</strong> {{ user.email }}</p>
+    <p><strong>User ID:</strong> {{ user.userid }}</p>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Grade:</strong> {{ user.grade }}</p>
+    <p><strong>Survey Response ID:</strong> {{ docid }}</p>
+    <p><strong>Timestamp:</strong> {{ current_time }}</p>
+    <h3>Problematic Responses:</h3>
+    <ul>
+        {% for item in problematic %}
+            <li>
+                <p><strong>Question:</strong> {{ item.question }}</p>
+                <p><strong>User Input:</strong> {{ item.response }}</p>
+                <p><strong>Matching Keywords:</strong> {{ item.matching_keywords | join(', ') }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <h3>All Text-Based User Responses:</h3>
+    <ul>
+        {% for response in all_responses %}
+            <li>{{ response.response }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,8 +1,8 @@
 {
   "projects": {
-    "default": "edifii-dev",
-    "test": "edifii-dev", 
-    "prod": "edifii-prod-40ae7"
+    "default": "edifii-prod2",
+    "test": "edifii-dev",
+    "prod": "edifii-prod2"
   },
   "targets": {},
   "etags": {},
