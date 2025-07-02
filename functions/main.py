@@ -16,7 +16,7 @@ import pytz
 app = initialize_app()
 
 
-def format_alert_html(problematic, safetywords, stringcheck, user, docid, all_responses):  
+def format_alert_html_keyword(problematic, safetywords, stringcheck, user, docid, all_responses):  
     """Format the HTML for safety alert emails using a Jinja2 template."""
     env = Environment(loader=FileSystemLoader(searchpath=os.path.dirname(__file__)))
     template = env.get_template('alert_template.html')
@@ -29,100 +29,120 @@ def format_alert_html(problematic, safetywords, stringcheck, user, docid, all_re
     # Render the template with the current time
     return template.render(problematic=problematic, safetywords=safetywords, stringcheck=stringcheck, user=user, docid=docid, current_time=current_time, all_responses=all_responses)
 
-@https_fn.on_request()
-def fntester_add(req: https_fn.Request) -> https_fn.Response:
-    """Take the text parameter passed to this HTTP endpoint and insert it into
-    a new document in the fntester collection."""
-    # Grab the text parameter.
-    input_param_text = req.args.get("text")
-    if input_param_text is None:
-        input_param_text = "default value; No text parameter provided"
 
-    firestore_client: google.cloud.firestore.Client = firestore.client()
+def format_alert_html_stress(stress_level, stringcheck_all_stress, stringcheck_stressors, user, docid):
+    """Format the HTML for safety alert emails using a Jinja2 template."""
+    env = Environment(loader=FileSystemLoader(searchpath=os.path.dirname(__file__)))
+    template = env.get_template('alert_template_stress.html')
 
-    # Push the new message into Cloud Firestore using the Firebase Admin SDK.
-    _, doc_ref = firestore_client.collection("fntester").add({
-        "input_param_text": input_param_text,
-        "surveyresponse": firestore_client.collection("surveyresponse").document("cj4zU5NjKjOvIkWG4JO0WLTnAb13_1725376398229").get().to_dict().get("surveyresponse"),
-        "userid": "cj4zU5NjKjOvIkWG4JO0WLTnAb13"
-    })
+    # Get the current time
+    est = pytz.timezone('US/Eastern')
+    current_time = datetime.now(est).strftime("%Y-%m-%d %H:%M:%S")
 
-    # Send back a message that we've successfully written the message.
-    return https_fn.Response(f"Messages with new ID {doc_ref.id} added.")
+    # Render the template with the current time
+    return template.render(
+        stress_level=stress_level,
+        stringcheck_all_stress=stringcheck_all_stress,
+        stringcheck_stressors=stringcheck_stressors,
+        user=user,
+        docid=docid,
+        current_time=current_time
+    )
 
+# @https_fn.on_request()
+# def fntester_add(req: https_fn.Request) -> https_fn.Response:
+#     """Take the text parameter passed to this HTTP endpoint and insert it into
+#     a new document in the fntester collection."""
+#     # Grab the text parameter.
+#     input_param_text = req.args.get("text")
+#     if input_param_text is None:
+#         input_param_text = "default value; No text parameter provided"
 
-@firestore_fn.on_document_created(document="fntester/{pushId}")
-def fntester_safety(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | None]) -> None:
-    """Listens for new documents to be added to /fntester. Checks for safety words in the survey response."""
+#     firestore_client: google.cloud.firestore.Client = firestore.client()
 
-    # Get the value of "surveyresponse" if it exists.
-    if event.data is None:
-        return "No data"
+#     # Push the new message into Cloud Firestore using the Firebase Admin SDK.
+#     _, doc_ref = firestore_client.collection("fntester").add({
+#         "input_param_text": input_param_text,
+#         "surveyresponse": firestore_client.collection("surveyresponse").document("cj4zU5NjKjOvIkWG4JO0WLTnAb13_1725376398229").get().to_dict().get("surveyresponse"),
+#         "userid": "cj4zU5NjKjOvIkWG4JO0WLTnAb13"
+#     })
 
-    try:
-        surveyresp = event.data.get("surveyresponse")
-        uid = event.data.get("userid")
-    except:
-        event.data.reference.update({"function_updates_safety_err": "Error - no surveyresponse found"})
-        return "No data"
-
-    firestore_client: google.cloud.firestore.Client = firestore.client()
-    if uid:
-        try:
-            userdat = firestore_client.collection("users").document(uid).get().to_dict()
-            event.data.reference.update({"user_snapshot": json.dumps(userdat)})
-        except:
-            event.data.reference.update({"function_updates_safety_err": f"Error - no user found {str(uid)}"})
-
-    # Retrieve safety keywords
-    safetywords = get_safety_keywords(firestore_client)
-
-    # Extract text and "Other" responses from the survey
-    responses = json.loads(surveyresp).get('results')
-    all_responses = extract_text_and_other_responses(responses)
-
-    # Convert all responses into a JSON string for alert purposes
-    stringcheck = json.dumps(all_responses)
-
-    # Run safety keyword checks
-    # Run safety keyword checks
-    safety_triggered_on = [
-        {
-            "question": response["question"],
-            "response": response["response"],
-            "matching_keywords": [safety_word for safety_word in safetywords if safety_word.casefold() in response["response"].casefold()]
-        }
-        for response in all_responses
-        if any(safety_word.casefold() in response["response"].casefold() for safety_word in safetywords)
-    ]
+#     # Send back a message that we've successfully written the message.
+#     return https_fn.Response(f"Messages with new ID {doc_ref.id} added.")
 
 
-    if safety_triggered_on:
-        html = format_alert_html(safety_triggered_on, safetywords, stringcheck, userdat, str(event.params['pushId']))
+# @firestore_fn.on_document_created(document="fntester/{pushId}")
+# def fntester_safety(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | None]) -> None:
+#     """Listens for new documents to be added to /fntester. Checks for safety words in the survey response."""
 
-        event.data.reference.update({"alert": "ALERT: SAFETY CHECK TRIGGERED",
-                                     "alert_sent_html": html,
-                                     "safewords": str(safetywords),
-                                     "function_updates_safety": "Alert: Safety check was triggered - please see email for details"})
+#     # Get the value of "surveyresponse" if it exists.
+#     if event.data is None:
+#         return "No data"
 
-        # Create a new document in the "mail" collection to trigger email
-        mail_data = {
-            "to": ["safety@edifii.me", "dev@edifii.me"],
-            "message": {
-                "subject": "Safety Check Alert Triggered",
-                "html": html,
-            }
-        }
-        firestore_client.collection("mail").add(mail_data)
+#     try:
+#         surveyresp = event.data.get("surveyresponse")
+#         uid = event.data.get("userid")
+#     except:
+#         event.data.reference.update({"function_updates_safety_err": "Error - no surveyresponse found"})
+#         return "No data"
 
-        # Trigger SMS alert
-        sms_data = {
-            "to": ["+18777804236", "+16174602500"],
-            "body": "Safety check was triggered - please see email for details"
-        }
-        firestore_client.collection("sms").add(sms_data)
-    else:
-        event.data.reference.update({"function_updates_safety": "No safety-check keywords found."})
+#     firestore_client: google.cloud.firestore.Client = firestore.client()
+#     if uid:
+#         try:
+#             userdat = firestore_client.collection("users").document(uid).get().to_dict()
+#             event.data.reference.update({"user_snapshot": json.dumps(userdat)})
+#         except:
+#             event.data.reference.update({"function_updates_safety_err": f"Error - no user found {str(uid)}"})
+
+#     # Retrieve safety keywords
+#     safetywords = get_safety_keywords(firestore_client)
+
+#     # Extract text and "Other" responses from the survey
+#     responses = json.loads(surveyresp).get('results')
+#     all_responses = extract_text_and_other_responses(responses)
+
+#     # Convert all responses into a JSON string for alert purposes
+#     stringcheck = json.dumps(all_responses)
+
+#     # Run safety keyword checks
+#     # Run safety keyword checks
+#     safety_triggered_on = [
+#         {
+#             "question": response["question"],
+#             "response": response["response"],
+#             "matching_keywords": [safety_word for safety_word in safetywords if safety_word.casefold() in response["response"].casefold()]
+#         }
+#         for response in all_responses
+#         if any(safety_word.casefold() in response["response"].casefold() for safety_word in safetywords)
+#     ]
+
+
+#     if safety_triggered_on:
+#         html = format_alert_html_keyword(safety_triggered_on, safetywords, stringcheck, userdat, str(event.params['pushId']))
+
+#         event.data.reference.update({"alert": "ALERT: SAFETY CHECK TRIGGERED",
+#                                      "alert_sent_html": html,
+#                                      "safewords": str(safetywords),
+#                                      "function_updates_safety": "Alert: Safety check was triggered - please see email for details"})
+
+#         # Create a new document in the "mail" collection to trigger email
+#         mail_data = {
+#             "to": ["safety@edifii.me", "dev@edifii.me"],
+#             "message": {
+#                 "subject": "Safety Check Alert Triggered",
+#                 "html": html,
+#             }
+#         }
+#         firestore_client.collection("mail").add(mail_data)
+
+#         # Trigger SMS alert
+#         sms_data = {
+#             "to": ["+18777804236", "+16174602500"],
+#             "body": "Safety check was triggered - please see email for details"
+#         }
+#         firestore_client.collection("sms").add(sms_data)
+#     else:
+#         event.data.reference.update({"function_updates_safety": "No safety-check keywords found."})
 
 
 
@@ -155,11 +175,15 @@ def safetycheck(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | None])
     # Extract text and "Other" responses from the survey
     responses = json.loads(surveyresp).get('results')
     all_responses = extract_text_and_other_responses(responses)
+    this_week_stress_responses, all_stress_responses, stressors = extract_stress_questions(responses)
 
     # Convert all responses into a JSON string for alert purposes
     stringcheck = json.dumps(all_responses)
 
-    # Run safety keyword checks
+    stringcheck_this_week_stress = json.dumps(this_week_stress_responses)
+    stringcheck_all_stress = json.dumps(all_stress_responses)
+    stringcheck_stressors = json.dumps(stressors)
+    # Run safety keyword checks for words
     safety_triggered_on = [
         {
             "question": response["question"],
@@ -171,7 +195,7 @@ def safetycheck(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | None])
     ]
 
     if safety_triggered_on:
-        html = format_alert_html(safety_triggered_on, safetywords, stringcheck, userdat, str(event.params['pushId']), all_responses)
+        html = format_alert_html_keyword(safety_triggered_on, safetywords, stringcheck, userdat, str(event.params['pushId']), all_responses)
 
         event.data.reference.update({"alert": "ALERT: SAFETY CHECK TRIGGERED",
                                      "alert_sent_html": html,
@@ -181,6 +205,7 @@ def safetycheck(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | None])
         # Create a new document in the "mail" collection to trigger email
         mail_data = {
             "to": ["safety@edifii.me"],
+            # "to": ["amatrician@edifii.me"],
             "message": {
                 "subject": "Survey Response Catchword Safety Alert",
                 "html": html,
@@ -197,6 +222,44 @@ def safetycheck(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | None])
         firestore_client.collection("sms").add(sms_data)
     else:
         event.data.reference.update({"function_updates_safety": "No safety-check keywords found."})
+
+
+    # stringcheck_this_week_stress = json.dumps(this_week_stress_responses)
+    # stringcheck_all_stress = json.dumps(all_stress_responses)
+
+    safety_triggered_on_thisweek_stress = any(stress_response["response"] > 7 for stress_response in this_week_stress_responses)
+    stress_level = this_week_stress_responses[0]
+    if safety_triggered_on_thisweek_stress:
+        html = format_alert_html_stress(stress_level, all_stress_responses, stressors, userdat, str(event.params['pushId']))
+
+        event.data.reference.update({"alert": "ALERT: STRESS SAFETY CHECK TRIGGERED",
+                                     "alert_sent_html": html,
+                                    #  "stress_level": str(safetywords),
+                                     "function_updates_safety": "Alert: Safety check was triggered - please see email for details"})
+
+        # Create a new document in the "mail" collection to trigger email
+        mail_data = {
+            "to": ["safety@edifii.me"],
+            # "to": ["amatrician@edifii.me"],
+            "message": {
+                "subject": "Survey Response Stress Level Safety Alert",
+                "html": html,
+            }
+        }
+        firestore_client.collection("mail").add(mail_data)
+
+        # Trigger SMS alert
+        sms_data = {
+            "to": ["+16174602500"],
+            # "to": ["+16172753510"],
+            "body": "Safety check was triggered - please see email for details"
+        }
+        firestore_client.collection("sms").add(sms_data)
+    else:
+        event.data.reference.update({"function_updates_safety": "No safety-check keywords found."})
+
+
+    
 
 
 def get_safety_keywords(firestore_client):
@@ -258,13 +321,21 @@ def extract_text_and_other_responses(responses):
     """Extract question text and user responses."""
     extracted_responses = []
     for item in responses:
-        answer_format = item.get("step", {}).get("answerFormat", {})
+        step = item.get("step", {})
+        # Critical fix: Handle the case where answerFormat is None
+        answer_format = step.get("answerFormat") or {}
+        
+        # Now we can safely use get() on answer_format
         question_text = answer_format.get("question", "N/A")
 
         result = item.get("result")
         
+        # Skip items with no result
+        if result is None:
+            continue
+            
         if answer_format.get("type") == "text":
-            extracted_responses.append({"question": question_text, "response": result.get("result")})
+            extracted_responses.append({"question": question_text, "response": result.get("result", "")})
         elif answer_format.get("type") in ["single", "multi"]:
             text_choices = answer_format.get("textChoices", [])
             for choice in text_choices:
@@ -275,11 +346,49 @@ def extract_text_and_other_responses(responses):
                             extracted_responses.append({"question": question_text, "response": other_value})
                     elif isinstance(result, list):
                         for selected_choice in result:
-                            if selected_choice.get("id") == choice.get("id"):
+                            if isinstance(selected_choice, dict) and selected_choice.get("id") == choice.get("id"):
                                 other_value = selected_choice.get("value")
                                 if isinstance(other_value, str):
                                     extracted_responses.append({"question": question_text, "response": other_value})
     return extracted_responses
+
+
+def extract_stress_questions(responses):
+    '''Extract stress questions and responses.'''
+    weekStress = []
+    otherStress = []
+    stressors = []
+    for item in responses:
+        # Handle potentially missing or null step data
+        step = item.get("step", {})
+        # Critical fix: Handle case where answerFormat is None
+        answer_format = step.get("answerFormat") or {}
+        
+        question_text = answer_format.get("question", "N/A")
+
+        result = item.get("result")
+        # Skip items with no result
+        if result is None:
+            continue
+
+        if answer_format.get("type") == "scale":
+            if answer_format.get("metric") == "stress" and answer_format.get("dimension") == "thisWeek":
+                result_value = result.get("result") if isinstance(result, dict) else None
+                weekStress.append({"question": question_text, "response": result_value})
+            elif answer_format.get("metric") == "stress" and answer_format.get("dimension") in [
+                "languageArts", "math", "science", "socialStudies", "worldLanguage", "physicalEducation"]:
+                result_value = result.get("result") if isinstance(result, dict) else None
+                otherStress.append({"question": question_text, "response": result_value})
+        elif answer_format.get("type") in ["single", "multi"] and isinstance(result, list):
+            for choice in result:
+                if isinstance(choice, dict) and choice.get("metric") == "stress" and choice.get("dimension") == "stressors":
+                    if choice.get("isOther", False):
+                        other_value = choice.get("value")
+                        if isinstance(other_value, str):
+                            stressors.append(other_value)
+                    else:
+                        stressors.append(choice.get("text", ""))
+    return weekStress, otherStress, stressors
 
 # def format_alert_html(problematic, safetywords, stringcheck, user, docid):
 #     """Format the HTML for safety alert emails."""

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Check Alert</title>
+</head>
+<body>
+    <h2 style="color: #d9534f;">Safety Check Alert Triggered</h2>
+    <h3>User Information:</h3>
+    <p><strong>User Email:</strong> {{ user.email }}</p>
+    <p><strong>User ID:</strong> {{ user.userid }}</p>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Grade:</strong> {{ user.grade }}</p>
+    <p><strong>Survey Response ID:</strong> {{ docid }}</p>
+    <p><strong>Timestamp:</strong> {{ current_time }}</p>
+
+    <h3>Stress Level:</h3>
+    <p>{{ stress_level.response }}</p>
+
+    {% if stringcheck_all_stress %}
+        <h3>Other Stress Questions:</h3>
+        <ul>
+            {% for item in stringcheck_all_stress %}
+                <li>
+                    <p><strong>Question:</strong> {{ item.question }}</p>
+                    <p><strong>Response:</strong> {{ item.response }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No additional stress-related questions were answered.</p>
+    {% endif %}
+
+    {% if stringcheck_stressors %}
+        <h3>Stressor Questions:</h3>
+        <ul>
+            {% for response in stringcheck_stressors %}
+                <li>
+                    <p>{{ response }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No specific stressors were reported.</p>
+    {% endif %}
+</body>
+</html>

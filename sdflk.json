@@ -1,0 +1,807 @@
+{
+    "id": "1",
+    "startTime": "2025-02-13T23:54:37.131Z",
+    "endTime": "2025-02-13T23:55:31.971Z",
+    "finishReason": "completed",
+    "results": [
+        {
+            "id": "33",
+            "step": {
+                "id": "33",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "What is your stress level this week?",
+                    "type": "scale",
+                    "maximumValue": 10,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "Aargh!",
+                    "minimumValueDescription": "No stress",
+                    "dimension": "thisWeek",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "## **This is the final stretch of questions!**"
+                    },
+                    {
+                        "id": "content_2",
+                        "url": "izzat-23493-cartoon-sketch-of-a-female-teen-looking-out-a-windo-8b935465-4685-4546-8bed-11f66c8839c5.png",
+                        "fit": null,
+                        "width": null,
+                        "height": 200
+                    },
+                    {
+                        "id": "content_3",
+                        "text": "# What is your stress level this week?"
+                    }
+                ]
+            },
+            "result": {
+                "question": "What is your stress level this week?",
+                "type": "scale",
+                "maximumValue": 10,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "Aargh!",
+                "minimumValueDescription": "No stress",
+                "dimension": "thisWeek",
+                "metric": "stress",
+                "result": 10,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:16.885Z",
+            "endTime": "2025-02-13T23:55:18.305Z"
+        },
+        {
+            "id": "34",
+            "step": {
+                "id": "34",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "What is currently causing you the most stress in your life?",
+                    "type": "multi",
+                    "textChoices": [
+                        {
+                            "id": "1",
+                            "text": "Family",
+                            "metric": "stress",
+                            "dimension": "stressors"
+                        },
+                        {
+                            "id": "2",
+                            "text": "Friends",
+                            "metric": "stress",
+                            "dimension": "stressors"
+                        },
+                        {
+                            "id": "3",
+                            "text": "Finances",
+                            "metric": "stress",
+                            "dimension": "stressors"
+                        },
+                        {
+                            "id": "4",
+                            "text": "Schoolwork",
+                            "metric": "stress",
+                            "dimension": "stressors"
+                        },
+                        {
+                            "id": "5",
+                            "text": "Post-school plans",
+                            "metric": "stress",
+                            "dimension": "stressors"
+                        },
+                        {
+                            "id": "6",
+                            "text": "Other (specify)",
+                            "value": "testing",
+                            "metric": "stress",
+                            "dimension": "stressors",
+                            "isOther": true
+                        }
+                    ],
+                    "defaultSelection": null,
+                    "otherField": false
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "# What is currently causing you the most stress in your life?"
+                    },
+                    {
+                        "id": "content_2",
+                        "text": "## *(You can select more than one)*"
+                    }
+                ]
+            },
+            "result": [
+                {
+                    "id": "4",
+                    "text": "Schoolwork",
+                    "metric": "stress",
+                    "dimension": "stressors"
+                },
+                {
+                    "id": "3",
+                    "text": "Finances",
+                    "metric": "stress",
+                    "dimension": "stressors"
+                },
+                {
+                    "id": "6",
+                    "text": "Other (specify)",
+                    "value": "testing",
+                    "metric": "stress",
+                    "dimension": "stressors",
+                    "isOther": true
+                }
+            ],
+            "startTime": "2025-02-13T23:55:19.109Z",
+            "endTime": "2025-02-13T23:55:22.053Z"
+        },
+        {
+            "id": "35",
+            "step": {
+                "id": "35",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "How much stress is Language Arts causing you?",
+                    "type": "scale",
+                    "maximumValue": 10,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "Aargh!",
+                    "minimumValueDescription": "No stress",
+                    "dimension": "languageArts",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "How much stress are each of these subjects causing you?",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                    },
+                    {
+                        "id": "content_2",
+                        "url": "izzat-23493-cartoon-of-english-classroom-with-books-and-papers-e6c1740d-c584-4827-80ce-cf62c4d907c4.png",
+                        "fit": null,
+                        "width": null,
+                        "height": 200
+                    },
+                    {
+                        "id": "content_3",
+                        "text": "Language Arts",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "How much stress is Language Arts causing you?",
+                "type": "scale",
+                "maximumValue": 10,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "Aargh!",
+                "minimumValueDescription": "No stress",
+                "dimension": "languageArts",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:26.471Z",
+            "endTime": "2025-02-13T23:55:26.481Z"
+        },
+        {
+            "id": "36",
+            "step": {
+                "id": "36",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "How much stress is Social Studies causing you?",
+                    "type": "scale",
+                    "maximumValue": 10,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "Aargh!",
+                    "minimumValueDescription": "No stress",
+                    "dimension": "socialStudies",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "How much stress are each of these subjects causing you?",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                    },
+                    {
+                        "id": "content_2",
+                        "url": "historical-events.png",
+                        "fit": null,
+                        "width": null,
+                        "height": 200
+                    },
+                    {
+                        "id": "content_3",
+                        "text": "Social Studies",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "How much stress is Social Studies causing you?",
+                "type": "scale",
+                "maximumValue": 10,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "Aargh!",
+                "minimumValueDescription": "No stress",
+                "dimension": "socialStudies",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:27.131Z",
+            "endTime": "2025-02-13T23:55:27.140Z"
+        },
+        {
+            "id": "37",
+            "step": {
+                "id": "37",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "How much stress is World Language causing you?",
+                    "type": "scale",
+                    "maximumValue": 10,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "Aargh!",
+                    "minimumValueDescription": "No stress",
+                    "dimension": "worldLanguage",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "How much stress are each of these subjects causing you?",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                    },
+                    {
+                        "id": "content_2",
+                        "url": "foreign-languages_v2.png",
+                        "fit": null,
+                        "width": null,
+                        "height": 200
+                    },
+                    {
+                        "id": "content_3",
+                        "text": "World Language",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "How much stress is World Language causing you?",
+                "type": "scale",
+                "maximumValue": 10,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "Aargh!",
+                "minimumValueDescription": "No stress",
+                "dimension": "worldLanguage",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:27.478Z",
+            "endTime": "2025-02-13T23:55:27.485Z"
+        },
+        {
+            "id": "38",
+            "step": {
+                "id": "38",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "How much stress is Math causing you?",
+                    "type": "scale",
+                    "maximumValue": 10,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "Aargh!",
+                    "minimumValueDescription": "No stress",
+                    "dimension": "math",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "How much stress are each of these subjects causing you?",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                    },
+                    {
+                        "id": "content_2",
+                        "url": "izzat-23493-cartoon-of-math-classroom-with-equations-on-a-chalk-b67b3c6c-ef1f-4e1a-a6ad-f36d0923156f.png",
+                        "fit": null,
+                        "width": null,
+                        "height": 200
+                    },
+                    {
+                        "id": "content_3",
+                        "text": "Math",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "How much stress is Math causing you?",
+                "type": "scale",
+                "maximumValue": 10,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "Aargh!",
+                "minimumValueDescription": "No stress",
+                "dimension": "math",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:27.628Z",
+            "endTime": "2025-02-13T23:55:27.635Z"
+        },
+        {
+            "id": "39",
+            "step": {
+                "id": "39",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "How much stress is Science causing you?",
+                    "type": "scale",
+                    "maximumValue": 10,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "Aargh!",
+                    "minimumValueDescription": "No stress",
+                    "dimension": "science",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "How much stress are each of these subjects causing you?",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                    },
+                    {
+                        "id": "content_2",
+                        "url": "science-graphics.png",
+                        "fit": null,
+                        "width": null,
+                        "height": 200
+                    },
+                    {
+                        "id": "content_3",
+                        "text": "Science",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "How much stress is Science causing you?",
+                "type": "scale",
+                "maximumValue": 10,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "Aargh!",
+                "minimumValueDescription": "No stress",
+                "dimension": "science",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:27.776Z",
+            "endTime": "2025-02-13T23:55:27.784Z"
+        },
+        {
+            "id": "40",
+            "step": {
+                "id": "40",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "How much stress is Health and Physical Education causing you?",
+                    "type": "scale",
+                    "maximumValue": 10,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "Aargh!",
+                    "minimumValueDescription": "No stress",
+                    "dimension": "physicalEducation",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "How much stress are each of these subjects causing you?",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                    },
+                    {
+                        "id": "content_2",
+                        "url": "izzat_23493_illustration_of_a_high_school_basketball_court.png",
+                        "fit": null,
+                        "width": null,
+                        "height": 200
+                    },
+                    {
+                        "id": "content_2",
+                        "text": "Health and Physical Education",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "How much stress is Health and Physical Education causing you?",
+                "type": "scale",
+                "maximumValue": 10,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "Aargh!",
+                "minimumValueDescription": "No stress",
+                "dimension": "physicalEducation",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:27.916Z",
+            "endTime": "2025-02-13T23:55:27.923Z"
+        },
+        {
+            "id": "41",
+            "step": {
+                "id": "41",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "On average last week, how many hours per day at home did you spend doing homework or prepping for tests?",
+                    "type": "scale",
+                    "maximumValue": 6,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "More than 6 hours/day!",
+                    "minimumValueDescription": "None",
+                    "dimension": "homeworkHours",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "On average last week, how many hours per day at home did you spend doing homework or prepping for tests?",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "On average last week, how many hours per day at home did you spend doing homework or prepping for tests?",
+                "type": "scale",
+                "maximumValue": 6,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "More than 6 hours/day!",
+                "minimumValueDescription": "None",
+                "dimension": "homeworkHours",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:28.049Z",
+            "endTime": "2025-02-13T23:55:28.054Z"
+        },
+        {
+            "id": "42",
+            "step": {
+                "id": "42",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "Last week, how many days did you come to school?",
+                    "type": "scale",
+                    "maximumValue": 5,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "Every day!",
+                    "minimumValueDescription": "None",
+                    "dimension": "daysAtSchool",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "Last week, how many days did you come to school?",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "Last week, how many days did you come to school?",
+                "type": "scale",
+                "maximumValue": 5,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "Every day!",
+                "minimumValueDescription": "None",
+                "dimension": "daysAtSchool",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:28.181Z",
+            "endTime": "2025-02-13T23:55:28.186Z"
+        },
+        {
+            "id": "43",
+            "step": {
+                "id": "43",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "How engaged do you feel with school (including classes, extracurriculars)?",
+                    "type": "scale",
+                    "maximumValue": 5,
+                    "minimumValue": 1,
+                    "defaultValue": 1,
+                    "step": 1,
+                    "maximumValueDescription": "Very!",
+                    "minimumValueDescription": "Not at all",
+                    "dimension": "engagedSchool",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "How engaged do you feel with school (including classes, extracurriculars)?",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "How engaged do you feel with school (including classes, extracurriculars)?",
+                "type": "scale",
+                "maximumValue": 5,
+                "minimumValue": 1,
+                "defaultValue": 1,
+                "step": 1,
+                "maximumValueDescription": "Very!",
+                "minimumValueDescription": "Not at all",
+                "dimension": "engagedSchool",
+                "metric": "stress",
+                "result": 1,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:28.602Z",
+            "endTime": "2025-02-13T23:55:28.607Z"
+        },
+        {
+            "id": "44",
+            "step": {
+                "id": "44",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "How many extracurriculars do you participate in?",
+                    "type": "scale",
+                    "maximumValue": 5,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "A lot!",
+                    "minimumValueDescription": "None",
+                    "dimension": "extracurriculars",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "How many extracurriculars do you participate in?",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "How many extracurriculars do you participate in?",
+                "type": "scale",
+                "maximumValue": 5,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "A lot!",
+                "minimumValueDescription": "None",
+                "dimension": "extracurriculars",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:28.899Z",
+            "endTime": "2025-02-13T23:55:28.904Z"
+        },
+        {
+            "id": "45",
+            "step": {
+                "id": "45",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "How many hours do you work at a job a week?",
+                    "type": "scale",
+                    "maximumValue": 5,
+                    "minimumValue": 0,
+                    "defaultValue": 0,
+                    "step": 1,
+                    "maximumValueDescription": "A lot!",
+                    "minimumValueDescription": "None",
+                    "dimension": "work",
+                    "metric": "stress",
+                    "result": null,
+                    "questionID": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "How many hours do you work at a job a week?",
+                        "fontSize": 30,
+                        "textAlign": "center"
+                    }
+                ]
+            },
+            "result": {
+                "question": "How many hours do you work at a job a week?",
+                "type": "scale",
+                "maximumValue": 5,
+                "minimumValue": 0,
+                "defaultValue": 0,
+                "step": 1,
+                "maximumValueDescription": "A lot!",
+                "minimumValueDescription": "None",
+                "dimension": "work",
+                "metric": "stress",
+                "result": 0,
+                "questionID": null
+            },
+            "startTime": "2025-02-13T23:55:29.365Z",
+            "endTime": "2025-02-13T23:55:29.370Z"
+        },
+        {
+            "id": "46",
+            "step": {
+                "id": "46",
+                "isMandatory": true,
+                "isIntermediate": false,
+                "answerFormat": {
+                    "question": "Compared to last week, your stress level this week is",
+                    "type": "single",
+                    "textChoices": [
+                        {
+                            "id": "1",
+                            "text": "Less",
+                            "metric": "stress",
+                            "dimension": "comparedToLastWeek"
+                        },
+                        {
+                            "id": "2",
+                            "text": "About the same",
+                            "metric": "stress",
+                            "dimension": "comparedToLastWeek"
+                        },
+                        {
+                            "id": "3",
+                            "text": "More",
+                            "metric": "stress",
+                            "dimension": "comparedToLastWeek"
+                        }
+                    ],
+                    "defaultSelection": null
+                },
+                "buttonText": "Next",
+                "content": [
+                    {
+                        "id": "content_1",
+                        "text": "## **Last question!**"
+                    },
+                    {
+                        "id": "content_2",
+                        "url": "state-of-mind-across-week.png",
+                        "fit": null,
+                        "width": null,
+                        "height": 200
+                    },
+                    {
+                        "id": "content_3",
+                        "text": "# Compared to last week, your stress level this week is"
+                    }
+                ]
+            },
+            "result": {
+                "id": "2",
+                "text": "About the same",
+                "metric": "stress",
+                "dimension": "comparedToLastWeek"
+            },
+            "startTime": "2025-02-13T23:55:29.700Z",
+            "endTime": "2025-02-13T23:55:30.729Z"
+        }
+    ]
+}
